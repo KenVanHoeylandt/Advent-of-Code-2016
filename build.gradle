@@ -1,0 +1,43 @@
+buildscript {
+    ext.kotlinVersion = '1.0.5-2'
+    ext.aocYear = '2016'
+    ext.mainClass = 'net.kenvanhoeylandt.aoc2016.Application'
+
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: "kotlin"
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': "Advent of Code Solution $aocYear",
+        	'Implementation-Version': '1.0.0',
+            'Main-Class': mainClass
+    }
+
+    archiveName "AdventOfCode${aocYear}.jar"
+
+    // add all dependencies inside the jar so it can be executed independently from the commandline
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    compile(
+        // Language
+        "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+        'com.google.code.findbugs:jsr305:3.0.+',
+        'io.reactivex.rxjava2:rxjava:2.0.1',
+
+        // Networking
+        'com.squareup.okhttp:okhttp:2.6.0'
+    )
+}
