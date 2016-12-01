@@ -51,10 +51,15 @@ open class Application {
             return challengeInputService.request(solution.day)
                     .map {
                         println("Solving assignment...")
-                        profiler.start("Solution")
-                        val result = solution.solve(it)
-                        profiler.stop("Solution")
-                        result
+                        profiler.start("Solution Part 1")
+                        val resultPartOne = solution.solvePartOne(it)
+                        profiler.stop("Solution Part 1")
+
+                        profiler.start("Solution Part 2")
+                        val resultPartTwo = solution.solvePartTwo(it)
+                        profiler.stop("Solution Part 2")
+
+                        " - part 1: $resultPartOne\n - part 2: $resultPartTwo"
                     }
                     .doOnError {
                         println("error when solving assignment")
@@ -68,7 +73,7 @@ open class Application {
                         it.printStackTrace()
                     }
                     .doOnSuccess {
-                        println("Solution for day ${solution.day}: $it")
+                        println("Solution for day ${solution.day}:\n$it")
                     }
         }
     }

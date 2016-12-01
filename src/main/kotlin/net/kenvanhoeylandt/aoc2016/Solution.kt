@@ -6,5 +6,8 @@ package net.kenvanhoeylandt.aoc2016
 abstract class Solution(val day: Int) {
 
     @Throws(Exception::class)
-    abstract fun solve(input: String): String
+    abstract fun solvePartOne(input: String): String
+
+    @Throws(Exception::class)
+    abstract fun solvePartTwo(input: String): String
 }
