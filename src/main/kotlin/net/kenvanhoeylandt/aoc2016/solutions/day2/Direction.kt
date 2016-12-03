@@ -1,7 +1,5 @@
 package net.kenvanhoeylandt.aoc2016.solutions.day2
 
-import java.util.*
-
 enum class Direction {
     UP,
     DOWN,

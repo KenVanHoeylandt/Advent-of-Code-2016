@@ -54,8 +54,6 @@ fun getNumberFromDirectionsPartTwo(directions: List<Direction>): Char {
             }
             else -> throw RuntimeException("unknown direction: $direction")
         }
-
-        val test = getDigitPartTwo(currentPosition)
     }
 
     return getDigitPartTwo(currentPosition)
