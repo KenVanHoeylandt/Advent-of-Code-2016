@@ -5,11 +5,12 @@ import net.kenvanhoeylandt.aoc2016.profiling.Profiler
 import net.kenvanhoeylandt.aoc2016.services.ChallengeInputService
 import net.kenvanhoeylandt.aoc2016.services.RequestService
 import net.kenvanhoeylandt.aoc2016.services.SessionService
-import net.kenvanhoeylandt.aoc2016.solutions.Day1Solution
+import net.kenvanhoeylandt.aoc2016.solutions.day1.Day1Solution
+import net.kenvanhoeylandt.aoc2016.solutions.day2.Day2Solution
 
 open class Application {
     companion object {
-        private val solutions = arrayOf<Solution>(Day1Solution())
+        private val solutions = arrayOf<Solution>(Day1Solution(), Day2Solution())
         private val requestService = RequestService()
         private val sessionService = SessionService(requestService)
         private val challengeInputService = ChallengeInputService(requestService)
