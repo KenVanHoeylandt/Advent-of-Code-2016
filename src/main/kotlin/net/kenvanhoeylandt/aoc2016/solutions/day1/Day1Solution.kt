@@ -1,7 +1,8 @@
-package net.kenvanhoeylandt.aoc2016.solutions
+package net.kenvanhoeylandt.aoc2016.solutions.day1
 
 import io.reactivex.Observable
 import net.kenvanhoeylandt.aoc2016.Solution
+import net.kenvanhoeylandt.aoc2016.geometry.MutablePosition2D
 
 class Day1Solution : Solution(1) {
 
@@ -10,24 +11,21 @@ class Day1Solution : Solution(1) {
         // read input
         val inputOperations = readInput(input)
         // convert to absolute movements
-        val absoluteOperations = getAbsoluteOperations(inputOperations);
+        val absoluteOperations = getAbsoluteOperations(inputOperations)
 
-        var currentX = 0
-        var currentY = 0
+        val distanceTravelled = Observable.fromIterable(absoluteOperations)
+                .collectInto(MutablePosition2D(0, 0), { position: MutablePosition2D, operation: AbsoluteOperation ->
+                    when (operation.cardinalDirection) {
+                        CardinalDirection.NORTH -> position.y -= operation.blocks
+                        CardinalDirection.EAST -> position.x += operation.blocks
+                        CardinalDirection.SOUTH -> position.y += operation.blocks
+                        CardinalDirection.WEST -> position.x -= operation.blocks
+                    }
+                })
+                .map{getDistanceTravelled(it)}
+                .blockingGet()
 
-        // update currentX and currentY until we arrived at our destination
-        absoluteOperations.forEach {
-            when (it.cardinalDirection) {
-                CardinalDirection.NORTH -> currentY -= it.blocks
-                CardinalDirection.EAST -> currentX += it.blocks
-                CardinalDirection.SOUTH -> currentY += it.blocks
-                CardinalDirection.WEST -> currentX -= it.blocks
-            }
-        }
-
-        val distanceTravelled = getDistanceTravelled(currentX, currentY)
-
-        return "travelled $distanceTravelled blocks to ($currentX, $currentY)"
+        return "travelled $distanceTravelled blocks"
     }
 
     @Throws(Exception::class)
@@ -110,6 +108,14 @@ class Day1Solution : Solution(1) {
     }
 
     /**
+     * @param position the 2d position
+     * @return the distance as defined by taxicab geometry (https://en.wikipedia.org/wiki/Taxicab_geometry)
+     */
+    private fun getDistanceTravelled(position: MutablePosition2D): Int {
+        return getDistanceTravelled(position.x, position.y)
+    }
+
+    /**
      * @param destinationX the relative X coordiante (relative to 0)
      * @param destinationY the relative Y coordinate (relative to 0)
      * @return the distance as defined by taxicab geometry (https://en.wikipedia.org/wiki/Taxicab_geometry)
@@ -125,25 +131,4 @@ class Day1Solution : Solution(1) {
 
         return diagonalTravel + singleAxisTravel
     }
-
-    enum class CardinalDirection {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST;
-
-        fun getLeftSideDirection() : CardinalDirection {
-            val nextIndex = if (ordinal > 0) (ordinal - 1) else CardinalDirection.values().count() - 1
-            return CardinalDirection.values()[nextIndex]
-        }
-
-        fun getRightSideDirection() : CardinalDirection {
-            val nextIndex = if (ordinal < (CardinalDirection.values().count() - 1)) (ordinal + 1) else 0
-            return CardinalDirection.values()[nextIndex]
-        }
-    }
-
-    data class InputOperation(val direction: String, val blocks: Int)
-
-    data class AbsoluteOperation(val cardinalDirection: CardinalDirection, val blocks: Int)
 }
