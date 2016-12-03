@@ -7,14 +7,18 @@ import net.kenvanhoeylandt.aoc2016.services.RequestService
 import net.kenvanhoeylandt.aoc2016.services.SessionService
 import net.kenvanhoeylandt.aoc2016.solutions.day1.Day1Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day2.Day2Solution
+import net.kenvanhoeylandt.aoc2016.solutions.day3.Day3Solution
 
 open class Application {
     companion object {
-        private val solutions = arrayOf<Solution>(Day1Solution(), Day2Solution())
         private val requestService = RequestService()
         private val sessionService = SessionService(requestService)
         private val challengeInputService = ChallengeInputService(requestService)
         private val profiler = Profiler()
+        private val solutions = arrayOf(
+                Day1Solution(),
+                Day2Solution(),
+                Day3Solution())
 
         @JvmStatic
         fun main(args: Array<String>) {
