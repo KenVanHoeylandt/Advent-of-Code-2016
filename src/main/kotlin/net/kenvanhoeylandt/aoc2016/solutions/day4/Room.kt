@@ -25,6 +25,25 @@ data class Room(val name: String, val sectorId: Int, val checksum: String) {
 
         return nameChecksum.toString() == checksum
     }
+
+    fun decrypt(): String {
+        val cleanedName = name.replace("-", " ")
+        val decrypted = StringBuilder()
+        for (character in cleanedName) {
+            if (character != ' ') {
+                val remainder = sectorId % 26
+                val newCharacter = character + remainder
+                if (newCharacter > 'z') {
+                    decrypted.append(newCharacter - 26)
+                } else {
+                    decrypted.append(newCharacter)
+                }
+            } else {
+                decrypted.append(character)
+            }
+        }
+        return decrypted.toString()
+    }
 }
 
 fun roomOf(text: String): Room {

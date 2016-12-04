@@ -21,6 +21,12 @@ class Day4Solution : Solution(4) {
 
     @Throws(Exception::class)
     override fun solvePartTwo(input: String): String {
-        return "nothing"
+        return Observable.just(input)
+                .flatMap { Observable.fromIterable(it.split("\n")) } // separate lines into separate Strings
+                .map(::roomOf) // convert input to Room instances
+                .filter { it.decrypt().contains("north") } // find "North Pole objects"
+                .map(Room::sectorId) // get the sector ID of the room
+                .blockingFirst()
+                .toString()
     }
 }
