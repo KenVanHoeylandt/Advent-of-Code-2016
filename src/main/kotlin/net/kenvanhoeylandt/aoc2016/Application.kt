@@ -8,6 +8,7 @@ import net.kenvanhoeylandt.aoc2016.services.SessionService
 import net.kenvanhoeylandt.aoc2016.solutions.day1.Day1Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day2.Day2Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day3.Day3Solution
+import net.kenvanhoeylandt.aoc2016.solutions.day4.Day4Solution
 
 open class Application {
     companion object {
@@ -18,7 +19,8 @@ open class Application {
         private val solutions = arrayOf(
                 Day1Solution(),
                 Day2Solution(),
-                Day3Solution())
+                Day3Solution(),
+                Day4Solution())
 
         @JvmStatic
         fun main(args: Array<String>) {
