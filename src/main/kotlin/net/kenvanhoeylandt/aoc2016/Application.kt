@@ -10,6 +10,7 @@ import net.kenvanhoeylandt.aoc2016.solutions.day2.Day2Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day3.Day3Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day4.Day4Solution
 import net.kenvanhoeylandt.aoc2016.solutions.day5.Day5Solution
+import net.kenvanhoeylandt.aoc2016.solutions.day6.Day6Solution
 
 open class Application {
     companion object {
@@ -22,7 +23,8 @@ open class Application {
                 Day2Solution(),
                 Day3Solution(),
                 Day4Solution(),
-                Day5Solution())
+                Day5Solution(),
+                Day6Solution())
 
         @JvmStatic
         fun main(args: Array<String>) {
