@@ -5,7 +5,6 @@ import net.kenvanhoeylandt.aoc2016.Solution
 
 class Day3Solution : Solution(3) {
 
-    @Throws(Exception::class)
     override fun solvePartOne(input: String): String {
         return Observable.just(input)
                 .flatMap { Observable.fromIterable(it.split("\n")) } // separate lines into separate Strings
@@ -16,7 +15,6 @@ class Day3Solution : Solution(3) {
                 .toString()
     }
 
-    @Throws(Exception::class)
     override fun solvePartTwo(input: String): String {
         // Get the TriangleSides objects as with part one
         val observableTriangleSidesFromPartOne = Observable.just(input)
@@ -29,7 +27,7 @@ class Day3Solution : Solution(3) {
         val columnThree = observableTriangleSidesFromPartOne.map{ it.c }
 
         // Get a single list from the 3 columns
-        val numberList = Observable.merge(columnOne, columnTwo, columnThree)
+        val numberList = Observable.concat(columnOne, columnTwo, columnThree)
                 .toList()
                 .blockingGet()
 

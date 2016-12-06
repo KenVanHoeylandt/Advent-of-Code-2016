@@ -6,7 +6,6 @@ import sun.java2d.xr.MutableInteger
 
 class Day4Solution : Solution(4) {
 
-    @Throws(Exception::class)
     override fun solvePartOne(input: String): String {
         return Observable.just(input)
                 .flatMap { Observable.fromIterable(it.split("\n")) } // separate lines into separate Strings
@@ -19,7 +18,6 @@ class Day4Solution : Solution(4) {
                 .toString()
     }
 
-    @Throws(Exception::class)
     override fun solvePartTwo(input: String): String {
         return Observable.just(input)
                 .flatMap { Observable.fromIterable(it.split("\n")) } // separate lines into separate Strings

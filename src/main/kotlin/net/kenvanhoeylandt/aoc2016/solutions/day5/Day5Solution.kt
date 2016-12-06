@@ -7,7 +7,6 @@ import javax.xml.bind.DatatypeConverter
 
 class Day5Solution : Solution(5) {
 
-    @Throws(Exception::class)
     override fun solvePartOne(input: String): String {
         var counter = 0 // counter for hashing
         val digits = StringBuilder() // storage for digits
@@ -26,7 +25,6 @@ class Day5Solution : Solution(5) {
         return digits.toString().toLowerCase()
     }
 
-    @Throws(Exception::class)
     override fun solvePartTwo(input: String): String {
         var counter = 0 // counter for hashing
         val digits = StringBuilder("________") // underscore serves as a placeholder for a password digits

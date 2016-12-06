@@ -6,7 +6,6 @@ import net.kenvanhoeylandt.aoc2016.geometry.MutablePosition2D
 
 class Day1Solution : Solution(1) {
 
-    @Throws(Exception::class)
     override fun solvePartOne(input: String): String {
         // read input
         val inputOperations = readInput(input)
@@ -28,7 +27,6 @@ class Day1Solution : Solution(1) {
         return "travelled $distanceTravelled blocks"
     }
 
-    @Throws(Exception::class)
     override fun solvePartTwo(input: String): String {
         // read input
         val inputOperations = readInput(input)

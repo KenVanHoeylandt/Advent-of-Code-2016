@@ -44,9 +44,7 @@ open class Application {
 
                 val solution = solutions[dayIndex]
 
-                solve(solution)
-                        .toFuture()
-                        .get() // wait to complete
+                solve(solution).blockingGet()
 
             } catch (caught: Exception) {
                 println("Usage:")
